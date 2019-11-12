@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax</title>
+    <script src="/static/js/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function () {
+            // 班定buttonAjax的click时间
+            $('#btnAjax').click(function () {
+                alert(1)
+                $.ajax({
+                    'url': '/ajax_handle', //请求地址
+                    // 预期返回的数据格式
+                    'dataType':'json',
+                    // 默认设置为true，异步；设置为false，同步请求
+                    //异步：发送ajax请求，代码会一直往下执行，不会等待回调函数执行（success（function（data）））后再执行下面的代码
+                    //同步：等待回调函数执行后，在执行后面的代码
+                    // 'async': false,
+                }).success(function (data) {
+                    // 回调函数，进行处理
+                    // alert(date.res)
+                    alert(2)
+                    if(data.res == 1){
+                        $('message').show().html('提示信息')
+                    }
+                })
+                alert(3)
+            })
+        })
+    </script>
+    <style>
+        #message{
+            display: none;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<input type="button" id="btnAjax" value="ajax请求">
+<div id="message"></div>
+</body>
+</html>
